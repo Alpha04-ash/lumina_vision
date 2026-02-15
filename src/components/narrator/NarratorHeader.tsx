@@ -1,9 +1,10 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ChevronLeft, Keyboard, Volume2, ShieldAlert } from "lucide-react";
+import { ChevronLeft, Keyboard, ShieldAlert, Volume2, Cloud, CloudOff, CloudCheck, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { SyncStatus } from "@/hooks/useNarratorHistory";
 
 interface NarratorHeaderProps {
     showHistory: boolean;
@@ -14,6 +15,7 @@ interface NarratorHeaderProps {
     setSafetyMode: (safety: boolean) => void;
     voice: "shimmer" | "nova";
     setVoice: (v: "shimmer" | "nova") => void;
+    syncStatus: SyncStatus;
 }
 
 export function NarratorHeader({
@@ -25,6 +27,7 @@ export function NarratorHeader({
     setSafetyMode,
     voice,
     setVoice,
+    syncStatus,
 }: NarratorHeaderProps) {
     return (
         <header className="flex items-center justify-between px-4 md:px-10 py-3 md:py-5 shrink-0 z-50 bg-black/40 backdrop-blur-2xl border-b border-white/5">
@@ -46,6 +49,21 @@ export function NarratorHeader({
             </div>
 
             <div className="flex gap-4 items-center">
+                {/* Sync Status */}
+                <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-white/5 border border-white/5">
+                    {syncStatus === "syncing" && <RefreshCw className="w-3 h-3 text-indigo-400 animate-spin" />}
+                    {syncStatus === "synced" && <Cloud className="w-3 h-3 text-emerald-400" />}
+                    {syncStatus === "error" && <CloudOff className="w-3 h-3 text-red-400" />}
+                    {syncStatus === "offline" && <CloudOff className="w-3 h-3 text-zinc-600" />}
+                    <span className={cn("text-[9px] font-bold uppercase tracking-wider hidden sm:inline",
+                        syncStatus === "syncing" ? "text-indigo-400" :
+                            syncStatus === "synced" ? "text-emerald-400" :
+                                syncStatus === "error" ? "text-red-400" : "text-zinc-600"
+                    )}>
+                        {syncStatus}
+                    </span>
+                </div>
+
                 <Button
                     variant="ghost"
                     size="sm"

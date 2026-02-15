@@ -43,7 +43,7 @@ export default function NarratorPage() {
     // 1. Logic Hooks
     const { videoRef, canvasRef, facingMode, toggleCamera, cameraError, takeCompressedPicture } = useCamera();
     const { speak, stopSpeaking, playingIndex, loadingVoiceIndex, voice, setVoice } = useSpeech(autoSpeak);
-    const { history, currentSessionId, showHistory, setShowHistory, startNewSession, loadSession, deleteSession } = useNarratorHistory(messages, setMessages);
+    const { history, currentSessionId, showHistory, setShowHistory, startNewSession, loadSession, deleteSession, syncStatus } = useNarratorHistory(messages, setMessages);
     const { playCaptureSound, playAlertSound, playMessageSound, playSuccessSound } = useSoundEffects();
 
     // 2. Action Logic
@@ -205,6 +205,7 @@ export default function NarratorPage() {
                     setSafetyMode={setSafetyMode}
                     voice={voice}
                     setVoice={setVoice}
+                    syncStatus={syncStatus}
                 />
 
                 <div className="flex-1 flex flex-col md:flex-row overflow-hidden relative">
