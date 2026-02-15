@@ -1,0 +1,17 @@
+{
+    "name": "Lumina Vision",
+    "short_name": "Lumina",
+    "description": "AI-Powered Narrative Assistant for the Visually Impaired",
+    "start_url": "/narrator",
+    "display": "standalone",
+    "background_color": "#000000",
+    "theme_color": "#4f46e5",
+    "icons": [
+        {
+            "src": "/next.svg",
+            "sizes": "512x512",
+            "type": "image/svg+xml",
+            "purpose": "any maskable"
+        }
+    ]
+}
